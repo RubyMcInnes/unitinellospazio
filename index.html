@@ -1,10 +1,313 @@
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Second Website</title>
+    <link rel="stylesheet" href="styles.css"> 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artworks</title>
+
 </head>
 <body>
-    <h1>Welcome to my second website!</h1>
-    <p>Managed via VS Code and hosted on GitHub Pages.</p>
+<div id="cg">
+  <div class="splash"><img src="presentation.png" alt="Uniti Nello Spazio"></div>
+  <div class="bar"><div class="logo-link"><img src="presentation.2png.png" alt="Uniti Nello Spazio"></div><a href="#" class="open-panel" aria-label="About and submit">+</a></div>
+  <div class="stage"><div class="board"></div></div>
+  <div class="zoom"><button class="zout" aria-label="Zoom out">−</button><button class="zin" aria-label="Zoom in">+</button></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-label="About and submit">
+  <button class="panel-close" type="button"> ✕</button>
+  
+  
+  <div class="panel-inner">
+    <img class="panel-logo" src="17.png" alt="Uniti Nello Spazio">
+    <p> Paintings of fear, freedom and life in the city. Uniti Nello Spazio gallery presents a range of artworks created by our community members, capturing an emotion, a story or a moment within our public spaces. <br> <br> 
+Together, the works reveal how unequal access to urban space is felt in everyday life, and invite all of us to reflect on how our behaviour shapes the way others move through the city.
+</p> <br> 
+    <p> <strong>Couldn't make our community sessions?</strong></p> <br> 
+    <h3>Submit your own artwork!</h3>
+  <form class="submit-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+      <label>Email<input type="email" name="email" required></label>
+      <label>Name or Title of the artwork<input type="text" name="title" required></label>
+      <label>Image (JPG or PNG)<input type="file" name="artwork" accept="image/*" required></label>
+      <label>Anything you'd like us to know about your experience navigating the city<textarea name="message"></textarea></label>
+      <button class="send" type="submit">Send</button>
+      <div class="status" role="status"></div>
+    </form>
+    <p>We would love to see you at our next community event! <br> Find out more on our instagram. </p>
+    <p><a class="ig" href="file:///Users/rubymcinnes/Library/CloudStorage/GoogleDrive-rmci0008@student.monash.edu/My%20Drive/Y3S2/40%20Free%20Blue%20iPhone%2017%20Pro%20Mockup%20Scattered.png" target="_blank" rel="noopener">Instagram @UnitiNelloSpazio</a></p>
+
+    
+  </div>
+</div>
+  <div class="torch"></div>
+  <button class="torch-btn" role="switch" aria-checked="true" aria-label="Torch"></button>
+  <div class="lb"><img class="big" alt=""><div class="bigcap"></div></div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById("cg");
+  if (!root || root._cgReady) return;            // don't run twice (kept in JS, never written into the HTML)
+  root._cgReady = true;
+
+  /* ---- YOUR ARTWORKS: src is the path to each image file, e.g. images/01.jpg ---- */
+  var works = [
+    { src: "01.jpeg", x: 140,  y: 120,  w: 220, h: 290, title: "The Wall of darkness, 2026", frame: 4, 
+         desc: "Everything feels close and tangled when I'm alone on the street." },
+    { src: "02.jpeg", x: 620,  y: 80,   w: 300, h: 200, title: "The Train Station Tunnel, 2026" },
+    { src: "03.jpeg", x: 1250, y: 220,  w: 200, h: 260, title: "Untitled, 2026" },
+    { src: "04.jpeg", x: 1900, y: 100,  w: 260, h: 340, title: "Layers, 2026", 
+        desc: "I experience a range of emotions on my journey home, one minute I feel like I am being watch by to many people the next I feel like I am all alone - anyonmous"
+    },
+    { src: "05.jpeg", x: 2500, y: 260,  w: 240, h: 180, title: "Untitled, 2026" },
+    { src: "06.jpeg", x: 360,  y: 620,  w: 180, h: 240, title: "Scattered, 2026" },
+    { src: "07.jpeg", x: 900,  y: 560,  w: 320, h: 420, title: "To many directions, 2026",
+        desc: "The unfamilar environment leads me feeling lost and vulnerable constantly"
+     },
+    { src: "08.jpeg", x: 1550, y: 700,  w: 240, h: 240, title: "My Walk Home, 2026" },
+    { src: "09.jpeg", x: 2150, y: 620,  w: 200, h: 270, title: "The Allyway, 2026", 
+        desc: "illustration of how I feel walking through the allyway near my accom each night. I now always walk the long way to avoid it. - anoynmous"
+     },
+    { src: "10.jpeg", x: 2650, y: 800, w: 220, h: 300, title: "Crossroads, 2026" },
+    { src: "11.jpeg", x: 180,  y: 1150, w: 300, h: 220, title: "Untitled, 2026" },
+    { src: "12.jpeg", x: 760,  y: 1220, w: 210, h: 280, title: "When even safety feels unsafe, 2026 ", 
+        desc: "when even when I plane to go the more safe route home, they is always that fear that limits me."
+     },
+    { src: "13.jpeg", x: 1400, y: 1250, w: 280, h: 360, title: "Colours of the Night, 2026" },
+    { src: "14.jpeg", x: 2050, y: 1200, w: 230, h: 170, title: "Tearing our city, 2026", 
+        desc: "The fear I feel at night is impacting how we can live united together"
+     },
+    { src: "15.jpeg", x: 2500, y: 1450, w: 200, h: 260, title: "Whats around the corner, 2026", 
+        desc: "Every corner I feel like I am going to be faced with something"
+     },
+    { src: "16.jpeg", x: 520,  y: 1620, w: 240, h: 200, title: "The neverending darkness, 2026" },
+    { src: "17.jpeg", x: 1100, y: 1700, w: 190, h: 250, title: "Crossing Paths, 2026" },
+    { src: "18.jpeg", x: 1900, y: 1620, w: 260, h: 220, title: "Apprehension, 2026" }
+  ];
+  var FRAMES = [2, 3, 4];     // the frame numbers you're keeping
+  works.forEach(function (w) {
+    if (!w.frame) w.frame = FRAMES[Math.floor(Math.random() * FRAMES.length)];
+  });
+
+  var $ = function (s) { return root.querySelector(s); };
+  var stage = $(".stage"), board = $(".board"), lb = $(".lb"), big = $(".big"), bigcap = $(".bigcap");
+  var BW = 3000, BH = 2000;
+
+  board.innerHTML = "";                          // start clean even if Cargo saved a built copy of the gallery
+  lb.classList.remove("open");
+  works.forEach(function (w, i) {
+    var f = document.createElement("div");
+    f.className = "work f" + (w.frame || (i % 4 + 1)); f.dataset.i = i;
+    f.style.cssText = "left:" + w.x + "px;top:" + w.y + "px;width:" + w.w + "px;height:" + w.h + "px";
+    f.innerHTML = '<img src="' + w.src + '" alt="' + w.title + '" draggable="false"><div class="cap">' + (i + 1) + "&nbsp;&nbsp;&nbsp;" + w.title + "</div>";
+    board.appendChild(f);
+  });
+
+    board.querySelectorAll(".work img").forEach(function (im) {
+  function fix() {
+    var box = im.parentNode, bw = parseFloat(getComputedStyle(im).borderLeftWidth) || 0;
+    var ratio = im.naturalWidth / im.naturalHeight; if (!ratio) return;
+    box.style.height = ((box.offsetWidth - 2 * bw) / ratio + 2 * bw) + "px";
+  }
+  if (im.complete) fix(); else im.addEventListener("load", fix);
+});
+
+  /* ---- pan + zoom ---- */
+  var v = { x: 0, y: 0, s: 1 }, minS = 0.2, maxS = 2.5;
+  function W() { return Math.min(root.clientWidth || innerWidth, innerWidth); }
+  function H() { return Math.min(root.clientHeight || innerHeight, innerHeight); }
+  // how far the board may be dragged: its edges can travel 300px in from the screen edge
+  function limit(pos, size, view) {
+    var m = 300, lo = view - size - m, hi = m;
+    return lo > hi ? (lo + hi) / 2 : Math.min(hi, Math.max(lo, pos));
+  }
+  function apply() {
+    v.x = limit(v.x, BW * v.s, W());
+    v.y = limit(v.y, BH * v.s, H());
+    board.style.transform = "translate(" + v.x + "px," + v.y + "px) scale(" + v.s + ")";
+  }
+  function zoomAt(cx, cy, f) {
+    if (!isFinite(f) || f <= 0) return;          // ignore bad zoom values (these caused the freeze)
+    var s = Math.min(maxS, Math.max(minS, v.s * f)), k = s / v.s;
+    v.x = cx - (cx - v.x) * k; v.y = cy - (cy - v.y) * k; v.s = s;
+    if (!isFinite(v.x + v.y + v.s)) { fit(); return; }
+    apply();
+  }
+  function fit() {
+    // start centred on the middle of the cluster of artworks
+    var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    works.forEach(function (w) {
+      x0 = Math.min(x0, w.x); y0 = Math.min(y0, w.y);
+      x1 = Math.max(x1, w.x + w.w); y1 = Math.max(y1, w.y + w.h);
+    });
+    minS = Math.min(W() / BW, H() / BH) * 0.6;
+    v.s = Math.max(minS, Math.min(1, W() / 1400) * 0.8);
+    v.x = W() / 2 - ((x0 + x1) / 2) * v.s;
+    v.y = H() / 2 - ((y0 + y1) / 2) * v.s;
+    apply();
+  }
+
+  stage.addEventListener("wheel", function (e) {
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.01));
+    else if (e.deltaX !== 0 || !Number.isInteger(e.deltaY)) { v.x -= e.deltaX; v.y -= e.deltaY; apply(); }
+    else zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.0015));
+  }, { passive: false });
+
+  var ptrs = new Map(), moved = 0, pinch = 0, downT = null;
+  stage.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse") ptrs.clear();   // a mouse is only ever one pointer; drop any stuck ones
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); downT = e.target; moved = 0;
+    if (ptrs.size === 2) { var a = Array.from(ptrs.values()); pinch = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); }
+  });
+  stage.addEventListener("pointermove", function (e) {
+    var p = ptrs.get(e.pointerId); if (!p) return;
+    var dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
+    moved += Math.abs(dx) + Math.abs(dy); if (moved < 6) return;
+    if (!stage.hasPointerCapture(e.pointerId)) stage.setPointerCapture(e.pointerId);
+    stage.classList.add("dragging");
+    if (ptrs.size === 1) { v.x += dx; v.y += dy; apply(); }
+    else if (ptrs.size === 2) {
+      var a = Array.from(ptrs.values()), d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+      if (pinch > 0 && d > 0) zoomAt((a[0].x + a[1].x) / 2, (a[0].y + a[1].y) / 2, d / pinch);
+      pinch = d;
+    }
+  });
+  function endPtr(e) {
+    var click = moved < 6 && ptrs.size === 1;
+    ptrs.delete(e.pointerId); stage.classList.remove("dragging");
+    if (click && e.type === "pointerup") { var it = downT && downT.closest(".work"); if (it) openWork(it); }
+  }
+  stage.addEventListener("pointerup", endPtr);
+  stage.addEventListener("pointercancel", endPtr);
+  stage.addEventListener("lostpointercapture", function (e) { ptrs.delete(e.pointerId); stage.classList.remove("dragging"); });
+  // if the mouse is released outside the gallery or the tab loses focus, forget all pointers
+  function clearPtrs() { ptrs.clear(); stage.classList.remove("dragging"); }
+  addEventListener("pointerup", clearPtrs);
+  addEventListener("pointercancel", clearPtrs);
+  addEventListener("blur", clearPtrs);
+
+  stage.addEventListener("dblclick", function (e) { if (!e.target.closest(".work")) fit(); });  // double-click empty space = reset view
+  $(".zin").onclick = function () { zoomAt(W() / 2, H() / 2, 1.3); };
+  $(".zout").onclick = function () { zoomAt(W() / 2, H() / 2, 1 / 1.3); };
+
+  function onKey(e) {
+    if (!document.body.contains(root)) { removeEventListener("keydown", onKey); return; }
+    if (panel.classList.contains("open")) { if (e.key === "Escape") closePanel(); return; }
+    if (e.key === "Escape") closeWork();
+    if (lb.classList.contains("open")) return;
+    if (e.key === "+" || e.key === "=") zoomAt(W() / 2, H() / 2, 1.2);
+    if (e.key === "-") zoomAt(W() / 2, H() / 2, 1 / 1.2);
+    if (e.key === "0") fit();
+    if (e.key === "ArrowLeft") { v.x += 80; apply(); }
+    if (e.key === "ArrowRight") { v.x -= 80; apply(); }
+    if (e.key === "ArrowUp") { v.y += 80; apply(); }
+    if (e.key === "ArrowDown") { v.y -= 80; apply(); }
+    
+  }
+  addEventListener("keydown", function (e) { if (panel.classList.contains("open")) return; if (e.key === "t" || e.key === "T") torchBtn.click(); });  // press T to toggle
+  addEventListener("resize", apply);
+
+  /* ---- click to enlarge ---- */
+  var current = null;
+  function rel(r) { var o = root.getBoundingClientRect(); return { left: r.left - o.left, top: r.top - o.top, width: r.width, height: r.height }; }
+  function setRect(r) { big.style.left = r.left + "px"; big.style.top = r.top + "px"; big.style.width = r.width + "px"; big.style.height = r.height + "px"; }
+ function openWork(item) {
+  current = item;
+  var w = works[item.dataset.i], th = item.querySelector("img");
+  big.src = w.src; big.alt = w.title;
+  big.className = "big f" + (w.frame || (item.dataset.i % 4 + 1));
+  bigcap.innerHTML = "";
+  var t = document.createElement("div"); t.className = "t"; t.textContent = w.title; bigcap.appendChild(t);
+  if (w.desc) { var d = document.createElement("div"); d.className = "d"; d.innerHTML = w.desc; bigcap.appendChild(d); }
+
+  var bw0 = parseFloat(getComputedStyle(th).borderLeftWidth) || 0;   // frame width on the thumbnail
+  big.style.transition = "none"; big.style.objectFit = "cover";
+  big.style.borderWidth = (bw0 * v.s) + "px";
+  setRect(rel(th.getBoundingClientRect()));
+  lb.classList.add("open"); item.style.visibility = "hidden";
+
+  var ratio = th.naturalWidth ? th.naturalWidth / th.naturalHeight : w.w / w.h;
+  var bwB = bw0 * 2;                                                  // frame is twice as thick when enlarged
+  var maxW = W() * 0.86 - 2 * bwB, maxH = H() * (w.desc ? 0.68 : 0.82) - 2 * bwB;
+  var iw = Math.min(maxW, maxH * ratio), ih = iw / ratio;
+  var tw = iw + 2 * bwB, tH = ih + 2 * bwB;
+  big.style.objectFit = "contain";
+
+  var topPos = (H() - tH) / 2 - (w.desc ? 40 : 10);
+  bigcap.style.bottom = "auto";
+  bigcap.style.top = (topPos + tH + 14) + "px";
+
+  requestAnimationFrame(function () { requestAnimationFrame(function () {
+    big.style.transition = "";
+    big.style.borderWidth = bwB + "px";
+    setRect({ left: (W() - tw) / 2, top: topPos, width: tw, height: tH });
+  }); });
+}
+
+function closeWork() {
+  if (!current) return;
+  var item = current; current = null;
+  var th = item.querySelector("img");
+  big.style.borderWidth = ((parseFloat(getComputedStyle(th).borderLeftWidth) || 0) * v.s) + "px";
+  setRect(rel(th.getBoundingClientRect()));
+  lb.classList.remove("open");
+  setTimeout(function () { item.style.visibility = ""; }, 450);
+}
+
+lb.addEventListener("click", closeWork); 
+
+/* ---- About & Submit overlay ---- */
+var panel = $(".panel"), form = $(".submit-form"), status = $(".status");
+function openPanel(e) { if (e) e.preventDefault(); panel.classList.add("open"); panel.scrollTop = 0; $(".panel-close").focus(); }
+function closePanel() { panel.classList.remove("open"); }
+$(".open-panel").addEventListener("click", openPanel);
+$(".panel-close").addEventListener("click", closePanel);
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (form.action.indexOf("YOUR_FORM_ID") > -1) { status.textContent = "The form isn't connected yet. Add your form address first."; return; }
+  status.textContent = "Sending…";
+  fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+    .then(function (r) {
+      if (r.ok) { form.reset(); status.textContent = "Thank you, we've received your submission."; }
+      else status.textContent = "Something went wrong. Please try again, or message us on Instagram.";
+    })
+    .catch(function () { status.textContent = "Something went wrong. Please try again, or message us on Instagram."; });
+});
+
+
+
+//* ---- torch effect ---- */
+var TORCH = true;        // true = torch starts on, false = starts off
+var RADIUS = 240;        // size of the light in px
+var torchBtn = $(".torch-btn");
+root.style.setProperty("--r", RADIUS + "px");
+var tx = W() / 2, ty = H() / 2, cx = tx, cy = ty;
+
+function setTorch(on) {
+  root.classList.toggle("torch-on", on);
+  torchBtn.setAttribute("aria-checked", on);
+}
+function glow() {
+  if (root.classList.contains("torch-on")) {
+    cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;           // light eases after the mouse
+    root.style.setProperty("--mx", cx + "px");
+    root.style.setProperty("--my", cy + "px");
+  }
+  requestAnimationFrame(glow);
+}
+function moveLight(e) { var o = root.getBoundingClientRect(); tx = e.clientX - o.left; ty = e.clientY - o.top; }
+root.addEventListener("pointermove", moveLight);
+root.addEventListener("pointerdown", moveLight);             // touch screens: light jumps to your finger
+torchBtn.onclick = function () { setTorch(!root.classList.contains("torch-on")); };
+addEventListener("keydown", function (e) { if (e.key === "t" || e.key === "T") torchBtn.click(); });  // press T to toggle
+setTorch(TORCH);
+glow();
+setTimeout(function () { $(".splash").classList.add("hide"); }, 1400);
+  fit();
+})();
+</script>
 </body>
 </html>
